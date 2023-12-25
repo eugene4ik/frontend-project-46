@@ -1,0 +1,24 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "bin": {
+    "gendiff": "./gendiff.js"
+  },
+  "type": "module",
+  "description": "Compares two configuration files and shows a difference.",
+  "main": "gendiff.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/eugene4ik/frontend-project-46.git"
+  },
+  "author": "Eugene Sokol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eugene4ik/frontend-project-46/issues"
+  },
+  "homepage": "https://github.com/eugene4ik/frontend-project-46#readme"
+  
+}
