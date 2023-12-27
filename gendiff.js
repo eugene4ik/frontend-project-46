@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-//import compareFiles from './__fixtures__/parser.js';
 import gendiff from './__fixtures__/parser.js';
 const program = new Command();
 

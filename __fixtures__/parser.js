@@ -27,7 +27,7 @@ const parseData = (filepath) => {
   }
 };
 const gendiff = (filepath1, filepath2, options) => {
-  console.log('Текущая рабочая директория:', process.cwd());
+  //console.log('Текущая рабочая директория:', process.cwd());
   // определяем абсолютный путь к файлу
   const absolutePath1 = resolveFilePath(filepath1);
   //console.log(absolutePath1);
@@ -45,23 +45,25 @@ const gendiff = (filepath1, filepath2, options) => {
       new Set([...Object.keys(data1), ...Object.keys(data2)])
     );
     const sortedKeys = orderBy(allKeys);
-    const differences = {};
+    const differences = [];
 
     sortedKeys.forEach((key) => {
       const value1 = data1[key];
       const value2 = data2[key];
 
       if (value1 !== value2) {
-        if (key in data1) differences[`- ${key}`] = value1;
-        if (key in data2) differences[`+ ${key}`] = value2;
+        if (key in data1) differences.push(`- ${key}: ${value1}`);
+        if (key in data2) differences.push(`+ ${key}: ${value2}`);
       } else {
-        if (key in data1) differences[`  ${key}`] = value1;
+        if (key in data1) differences.push(`  ${key}: ${value1}`);
       }
     });
 
-    return differences;
+    return differences.join('\n');
   };
-  console.log(compareFiles(data1, data2));
+  const result = compareFiles(data1, data2);
+  console.log(result);
+  return result;
 };
 export default gendiff;
 
