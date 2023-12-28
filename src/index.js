@@ -1,26 +1,6 @@
-import { readFileSync } from 'node:fs';
-import path from 'path';
 import _ from 'lodash';
+import { parseData, resolveFilePath } from './parser.js';
 
-const resolveFilePath = (filePath) => (
-  path.isAbsolute(filePath)
-    ? filePath
-    : path.resolve(process.cwd(), filePath)
-);
-const determineFormat = (filepath) => path.extname(filepath).slice(1);
-const parseData = (filepath) => {
-  const absolutePath = resolveFilePath(filepath);
-  const format = determineFormat(absolutePath);
-  const data = readFileSync(absolutePath, 'utf8');
-
-  switch (format) {
-    case 'json':
-      return JSON.parse(data);
-    // Добавить обработку других форматов кроме json
-    default:
-      throw new Error(`Unsupported file format: ${format}`);
-  }
-};
 const gendiff = (filepath1, filepath2) => {
   // определяем абсолютный путь к файлу
   resolveFilePath(filepath1);
@@ -28,8 +8,8 @@ const gendiff = (filepath1, filepath2) => {
 
   const fileOne = parseData(filepath1);
   const fileTwo = parseData(filepath2);
-  // Результаты парса файлов
 
+  // Результаты парса файлов
   const compareFiles = (fileData1, fileData2) => {
     const allKeys = Array.from(
       new Set([...Object.keys(fileData1), ...Object.keys(fileData2)]),

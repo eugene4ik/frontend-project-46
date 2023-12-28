@@ -1,3 +1,7 @@
 {
-  "trailingComma": "none"
+  "trailingComma": "all",
+  "prettier.singleQuote": true,
+  "singleQuote": true,
+  "printWidth": 75,
+  "arrowParens": "always"
 }
