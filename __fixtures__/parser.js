@@ -2,10 +2,11 @@ import { readFileSync } from 'node:fs';
 import path from 'path';
 import _ from 'lodash';
 
-const resolveFilePath = (filePath) =>
+const resolveFilePath = (filePath) => (
   path.isAbsolute(filePath)
     ? filePath
-    : path.resolve(process.cwd(), filePath);
+    : path.resolve(process.cwd(), filePath)
+);
 const determineFormat = (filepath) => path.extname(filepath).slice(1);
 const parseData = (filepath) => {
   const absolutePath = resolveFilePath(filepath);
@@ -31,7 +32,7 @@ const gendiff = (filepath1, filepath2) => {
 
   const compareFiles = (fileData1, fileData2) => {
     const allKeys = Array.from(
-      new Set([...Object.keys(fileData1), ...Object.keys(fileData2)])
+      new Set([...Object.keys(fileData1), ...Object.keys(fileData2)]),
     );
     const sortedKeys = _.orderBy(allKeys);
     const differences = [];

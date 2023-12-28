@@ -26,6 +26,7 @@
   "homepage": "https://github.com/eugene4ik/frontend-project-46#readme",
   "dependencies": {
     "commander": "^11.1.0",
+    "lodash": "^4.17.21",
     "lodash.orderby": "^4.6.0"
   },
   "devDependencies": {
