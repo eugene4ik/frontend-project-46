@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import gendiff from './__fixtures__/parser.js';
+
 const program = new Command();
 
 program
@@ -9,5 +10,7 @@ program
   .version('1.0.0', '-V, --version')
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format')
-  .action(gendiff);
-program.parse(process.argv);
+  .action((filepath1, filepath2, options) => {
+    gendiff(filepath1, filepath2, options.format);
+  });
+program.parse();

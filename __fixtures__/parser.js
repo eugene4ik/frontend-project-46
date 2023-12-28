@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { readFileSync } from 'node:fs';
 import path from 'path';
 import orderBy from 'lodash.orderBy';
@@ -9,10 +8,7 @@ const resolveFilePath = (filePath) => {
     : path.resolve(process.cwd(), filePath);
 };
 
-const determineFormat = (filepath) => {
-  return path.extname(filepath).slice(1);
-};
-
+const determineFormat = (filepath) => path.extname(filepath).slice(1);
 const parseData = (filepath) => {
   const absolutePath = resolveFilePath(filepath);
   const format = determineFormat(absolutePath);
@@ -26,45 +22,42 @@ const parseData = (filepath) => {
       throw new Error(`Unsupported file format: ${format}`);
   }
 };
-const gendiff = (filepath1, filepath2, options) => {
-  //console.log('Текущая рабочая директория:', process.cwd());
+const gendiff = (filepath1, filepath2) => {
   // определяем абсолютный путь к файлу
   const absolutePath1 = resolveFilePath(filepath1);
   //console.log(absolutePath1);
   const absolutePath2 = resolveFilePath(filepath2);
-  //функция determineFormat определяет формат переданного файла
-  const format1 = determineFormat(absolutePath1);
-  const format2 = determineFormat(absolutePath2);
+  // функция determineFormat определяет формат переданного файла
+  // const format1 = determineFormat(absolutePath1);
+  // const format2 = determineFormat(absolutePath2);
 
-  const data1 = parseData(filepath1);
-  const data2 = parseData(filepath2);
+  const fileOne = parseData(filepath1);
+  const fileTwo = parseData(filepath2);
   // Результаты парса файлов
 
-  const compareFiles = (data1, data2) => {
+  const compareFiles = (fileOne, fileTwo) => {
     const allKeys = Array.from(
-      new Set([...Object.keys(data1), ...Object.keys(data2)])
+      new Set([...Object.keys(fileOne), ...Object.keys(fileTwo)])
     );
     const sortedKeys = orderBy(allKeys);
     const differences = [];
 
     sortedKeys.forEach((key) => {
-      const value1 = data1[key];
-      const value2 = data2[key];
+      const value1 = fileOne[key];
+      const value2 = fileTwo[key];
 
       if (value1 !== value2) {
-        if (key in data1) differences.push(`- ${key}: ${value1}`);
-        if (key in data2) differences.push(`+ ${key}: ${value2}`);
-      } else {
-        if (key in data1) differences.push(`  ${key}: ${value1}`);
+        if (key in fileOne) differences.push(`- ${key}: ${value1}`);
+        if (key in fileTwo) differences.push(`+ ${key}: ${value2}`);
+      } else if (key in fileOne) {
+        differences.push(`  ${key}: ${value1}`);
       }
     });
-
     return differences.join('\n');
   };
-  const result = compareFiles(data1, data2);
+  const result = compareFiles(fileOne, fileTwo);
+  // eslint-disable-next-line no-console
   console.log(result);
   return result;
 };
 export default gendiff;
-
-// absolute path: gendiff /Users/mac/vs_code/hexlet-git/frontend-project-46/__fixtures__/file1.json /Users/mac/vs_code/hexlet-git/frontend-project-46/__fixtures__/file2.json

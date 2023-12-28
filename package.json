@@ -8,6 +8,9 @@
     "test": "jest",
     "coverage": "jest --coverage"
   },
+  "env": {
+    "jest": true
+  },
   "type": "module",
   "description": "Compares two configuration files and shows a difference.",
   "main": "gendiff.js",
@@ -22,6 +25,7 @@
   },
   "homepage": "https://github.com/eugene4ik/frontend-project-46#readme",
   "dependencies": {
+    "commander": "^11.1.0",
     "lodash.orderby": "^4.6.0"
   },
   "devDependencies": {

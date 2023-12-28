@@ -1,4 +1,4 @@
-import gendiff from '../__fixtures__/parser.js';
+import gendiff from '../__fixtures__/parser';
 
 describe('gendiff', () => {
   it('Compare different files', () => {
