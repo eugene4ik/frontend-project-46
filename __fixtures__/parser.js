@@ -1,13 +1,11 @@
 import { readFileSync } from 'node:fs';
 import path from 'path';
-import orderBy from 'lodash.orderBy';
+import _ from 'lodash';
 
-const resolveFilePath = (filePath) => {
-  return path.isAbsolute(filePath)
+const resolveFilePath = (filePath) =>
+  path.isAbsolute(filePath)
     ? filePath
     : path.resolve(process.cwd(), filePath);
-};
-
 const determineFormat = (filepath) => path.extname(filepath).slice(1);
 const parseData = (filepath) => {
   const absolutePath = resolveFilePath(filepath);
@@ -24,32 +22,28 @@ const parseData = (filepath) => {
 };
 const gendiff = (filepath1, filepath2) => {
   // определяем абсолютный путь к файлу
-  const absolutePath1 = resolveFilePath(filepath1);
-  //console.log(absolutePath1);
-  const absolutePath2 = resolveFilePath(filepath2);
-  // функция determineFormat определяет формат переданного файла
-  // const format1 = determineFormat(absolutePath1);
-  // const format2 = determineFormat(absolutePath2);
+  resolveFilePath(filepath1);
+  resolveFilePath(filepath2);
 
   const fileOne = parseData(filepath1);
   const fileTwo = parseData(filepath2);
   // Результаты парса файлов
 
-  const compareFiles = (fileOne, fileTwo) => {
+  const compareFiles = (fileData1, fileData2) => {
     const allKeys = Array.from(
-      new Set([...Object.keys(fileOne), ...Object.keys(fileTwo)])
+      new Set([...Object.keys(fileData1), ...Object.keys(fileData2)])
     );
-    const sortedKeys = orderBy(allKeys);
+    const sortedKeys = _.orderBy(allKeys);
     const differences = [];
 
     sortedKeys.forEach((key) => {
-      const value1 = fileOne[key];
-      const value2 = fileTwo[key];
+      const value1 = fileData1[key];
+      const value2 = fileData2[key];
 
       if (value1 !== value2) {
-        if (key in fileOne) differences.push(`- ${key}: ${value1}`);
-        if (key in fileTwo) differences.push(`+ ${key}: ${value2}`);
-      } else if (key in fileOne) {
+        if (key in fileData1) differences.push(`- ${key}: ${value1}`);
+        if (key in fileData2) differences.push(`+ ${key}: ${value2}`);
+      } else if (key in fileData1) {
         differences.push(`  ${key}: ${value1}`);
       }
     });

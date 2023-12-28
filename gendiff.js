@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import gendiff from './__fixtures__/parser.js';
+import gendiff from './__fixtures__/parser';
 
 const program = new Command();
 
