@@ -1,4 +1,4 @@
-import gendiff from '../src/parser.js';
+import gendiff from '../src/index.js';
 
 describe('gendiff', () => {
   it('Compare different files', () => {
