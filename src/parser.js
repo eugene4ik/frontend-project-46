@@ -1,19 +1,4 @@
-import { readFileSync } from 'node:fs';
-import path from 'path';
-
-const resolveFilePath = (filePath) => {
-  if (path.isAbsolute(filePath)) {
-    return filePath;
-  }
-  return path.resolve(process.cwd(), filePath);
-};
-
-const determineFormat = (filepath) => path.extname(filepath).slice(1);
-const parseData = (filepath) => {
-  const absolutePath = resolveFilePath(filepath);
-  const format = determineFormat(absolutePath);
-  const data = readFileSync(absolutePath, 'utf8');
-
+const parseData = (data, format) => {
   switch (format) {
     case 'json':
       return JSON.parse(data);
@@ -23,4 +8,4 @@ const parseData = (filepath) => {
   }
 };
 
-export { resolveFilePath, parseData };
+export default parseData;

@@ -10,7 +10,9 @@ program
   .version('1.0.0', '-V, --version')
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format')
-  .action((filepath1, filepath2, options) => {
-    gendiff(filepath1, filepath2, options.format);
+  .action((filepath1, filepath2) => {
+    const result = gendiff(filepath1, filepath2);
+    // eslint-disable-next-line no-console
+    console.log(result);
   });
-program.parse();
+program.parse(process.argv);
