@@ -1,8 +1,12 @@
+import yaml from 'js-yaml';
+
 const parseData = (data, format) => {
   switch (format) {
     case 'json':
       return JSON.parse(data);
-    // Добавить обработку других форматов кроме json
+    case 'yaml':
+    case 'yml':
+      return yaml.load(data);
     default:
       throw new Error(`Unsupported file format: ${format}`);
   }

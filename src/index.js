@@ -43,10 +43,9 @@ const gendiff = (filepath1, filepath2) => {
 
   const fileOneParsed = parseData(fileOneData, getFormat(filepath1));
   const fileTwoParsed = parseData(fileTwoData, getFormat(filepath2));
-
   const result = compareFiles(fileOneParsed, fileTwoParsed);
+
   return result;
 };
-// eslint-disable-next-line no-console
 
 export default gendiff;
