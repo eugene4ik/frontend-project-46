@@ -2,6 +2,9 @@
   "trailingComma": "all",
   "prettier.singleQuote": true,
   "singleQuote": true,
-  "printWidth": 100,
-  "arrowParens": "always"
+  "printWidth": 50,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "objectCurlySpacing": true,
+  "objectPropertyNewline": true
 }
