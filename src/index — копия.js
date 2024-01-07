@@ -9,15 +9,17 @@ const resolveFilePath = (filePath) => {
   }
   return path.resolve(process.cwd(), filePath);
 };
-const calculateIndent = (depth, leftShift = 2) => {
+const calculateIndent = (depth) => {
+  const leftShift = 2;
+
   return ' '.repeat(depth * 4 - leftShift);
 };
 const customStringify = (value, depth) => {
   if (_.isObject(value) && !Array.isArray(value)) {
-    const baseIndent = calculateIndent(depth + 1, 4);
-    const innerIndent = calculateIndent(depth + 1, 0);
+    const baseIndent = calculateIndent(depth);
+    const innerIndent = calculateIndent(depth + 1);
     const lines = Object.entries(value).map(([key, val]) => {
-      return `${innerIndent}${key}: ${_.isObject(val) ? customStringify(val, depth + 1) : val}`;
+      return `${innerIndent}  ${key}: ${_.isObject(val) ? customStringify(val, depth + 1) : val}`;
     });
     return `{\n${lines.join('\n')}\n${baseIndent}}`;
   } else {
@@ -28,7 +30,6 @@ const customStringify = (value, depth) => {
 const formatValue = (diff, depth = 1) => {
   const lines = diff.map(({ key, type, value, oldValue, newValue, children }) => {
     const baseIndent = calculateIndent(depth);
-
     switch (type) {
       case 'nested':
         return `${baseIndent}  ${key}: ${formatValue(children, depth + 1)}`;
@@ -45,8 +46,7 @@ const formatValue = (diff, depth = 1) => {
         return `${baseIndent}  ${key}: ${customStringify(value, depth)}`;
     }
   });
-  const innerIndent = calculateIndent(depth, 4);
-  const result = `{\n${lines.join('\n')}\n${innerIndent}}`;
+  const result = `{\n${lines.join('\n')}\n}`;
   return result;
 };
 
