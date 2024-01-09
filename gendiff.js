@@ -9,9 +9,10 @@ program
   .description('Compares two configuration files and shows a difference.')
   .version('1.0.0', '-V, --version')
   .arguments('<filepath1> <filepath2>')
-  .option('-f, --format <type>', 'output format')
-  .action((filepath1, filepath2) => {
-    const result = gendiff(filepath1, filepath2);
+  .option('-f, --format <type>', 'output format', 'stylish')
+  .action((filepath1, filepath2, options) => {
+    const format = options.format;
+    const result = gendiff(filepath1, filepath2, format);
     // eslint-disable-next-line no-console
     console.log(result);
   });
