@@ -18,6 +18,5 @@ lint:
 
 publish:
 	npm publish
-gendiff:
-	./bin/gendiff.js --format plain ./__fixtures__/file1.yaml ./__fixtures__/file2.json
+	
 .PHONY: test
