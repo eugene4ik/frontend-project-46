@@ -7,7 +7,14 @@ const stringify = (value) => {
 
 const plain = (difference, parent = '') => {
   const lines = difference.flatMap(
-    ({ key, type, value, oldValue, newValue, children }) => {
+    ({
+      key,
+      type,
+      value,
+      oldValue,
+      newValue,
+      children,
+    }) => {
       const fullPath = parent ? `${parent}.${key}` : key;
 
       switch (type) {

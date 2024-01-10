@@ -72,7 +72,6 @@ const gendiff = (filepath1, filepath2, format = 'stylish') => {
   const fileTwoParsed = parseData(fileTwoData, getFormat(filepath2));
   const difference = compareFiles(fileOneParsed, fileTwoParsed);
   const result = selectedFormatter(difference, format);
-  //const result = stylish(difference);
 
   // const result = compareFiles(fileOneParsed, fileTwoParsed);
   // console.dir(result, { depth: null });

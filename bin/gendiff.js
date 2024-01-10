@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import gendiff from './src/index.js';
+import gendiff from '../src/index.js';
 
 const program = new Command();
 
@@ -11,7 +11,7 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format', 'stylish')
   .action((filepath1, filepath2, options) => {
-    const format = options.format;
+    const { format } = options;
     const result = gendiff(filepath1, filepath2, format);
     // eslint-disable-next-line no-console
     console.log(result);

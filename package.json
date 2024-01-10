@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "bin": {
-    "gendiff": "gendiff.js"
+    "gendiff": "bin/gendiff.js"
   },
   "scripts": {
     "test": "jest",
@@ -13,7 +13,7 @@
   },
   "type": "module",
   "description": "Compares two configuration files and shows a difference.",
-  "main": "gendiff.js",
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/eugene4ik/frontend-project-46.git"

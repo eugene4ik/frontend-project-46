@@ -1,17 +1,13 @@
 import _ from 'lodash';
 
-const calculateIndent = (depth, leftShift = 2) =>
-  ' '.repeat(depth * 4 - leftShift);
+const calculateIndent = (depth, leftShift = 2) => ' '.repeat(depth * 4 - leftShift);
 
 const customStringify = (value, depth) => {
   if (_.isObject(value) && !Array.isArray(value)) {
     const baseIndent = calculateIndent(depth + 1, 4);
     const innerIndent = calculateIndent(depth + 1, 0);
     const lines = Object.entries(value).map(
-      ([key, val]) =>
-        `${innerIndent}${key}: ${
-          _.isObject(val) ? customStringify(val, depth + 1) : val
-        }`,
+      ([key, val]) => `${innerIndent}${key}: ${_.isObject(val) ? customStringify(val, depth + 1) : val}`,
     );
     return `{\n${lines.join('\n')}\n${baseIndent}}`;
   }
@@ -20,7 +16,14 @@ const customStringify = (value, depth) => {
 
 const stylish = (difference, depth = 1) => {
   const lines = difference.map(
-    ({ key, type, value, oldValue, newValue, children }) => {
+    ({
+      key,
+      type,
+      value,
+      oldValue,
+      newValue,
+      children,
+    }) => {
       const baseIndent = calculateIndent(depth);
 
       switch (type) {

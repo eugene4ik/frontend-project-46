@@ -8,7 +8,7 @@ const parseData = (data, format) => {
     case 'yml':
       return yaml.load(data);
     default:
-      throw new Error(`Unsupported file format: ${format}`);
+      return null;
   }
 };
 
