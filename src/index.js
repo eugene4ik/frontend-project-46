@@ -12,17 +12,15 @@ const resolveFilePath = (filePath) => {
 };
 
 const compareFiles = (fileData1, fileData2) => {
-  let difference = [];
-
   const allKeys = _.union(Object.keys(fileData1), Object.keys(fileData2));
 
-  _.orderBy(allKeys).forEach((key) => {
+  return _.orderBy(allKeys).reduce((acc, key) => {
     const value1 = fileData1[key];
     const value2 = fileData2[key];
 
     if (_.isObject(value1) && _.isObject(value2)) {
-      difference = [
-        ...difference,
+      return [
+        ...acc,
         {
           key,
           type: 'nested',
@@ -31,8 +29,8 @@ const compareFiles = (fileData1, fileData2) => {
       ];
     } else if (value1 !== value2) {
       if (key in fileData1 && key in fileData2) {
-        difference = [
-          ...difference,
+        return [
+          ...acc,
           {
             key,
             type: 'updated',
@@ -41,8 +39,8 @@ const compareFiles = (fileData1, fileData2) => {
           },
         ];
       } else if (key in fileData1) {
-        difference = [
-          ...difference,
+        return [
+          ...acc,
           {
             key,
             type: 'removed',
@@ -50,8 +48,8 @@ const compareFiles = (fileData1, fileData2) => {
           },
         ];
       } else if (key in fileData2) {
-        difference = [
-          ...difference,
+        return [
+          ...acc,
           {
             key,
             type: 'added',
@@ -60,8 +58,8 @@ const compareFiles = (fileData1, fileData2) => {
         ];
       }
     } else {
-      difference = [
-        ...difference,
+      return [
+        ...acc,
         {
           key,
           type: 'unchanged',
@@ -69,8 +67,7 @@ const compareFiles = (fileData1, fileData2) => {
         },
       ];
     }
-  });
-  return difference;
+  }, []);
 };
 
 const getFormat = (filepath) => path.extname(filepath).slice(1);
