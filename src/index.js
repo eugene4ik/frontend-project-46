@@ -27,7 +27,9 @@ const compareFiles = (fileData1, fileData2) => {
           children: compareFiles(value1, value2),
         },
       ];
-    } else if (value1 !== value2) {
+    }
+
+    if (value1 !== value2) {
       if (key in fileData1 && key in fileData2) {
         return [
           ...acc,
@@ -38,7 +40,9 @@ const compareFiles = (fileData1, fileData2) => {
             newValue: value2,
           },
         ];
-      } else if (key in fileData1) {
+      }
+
+      if (key in fileData1) {
         return [
           ...acc,
           {
@@ -47,7 +51,9 @@ const compareFiles = (fileData1, fileData2) => {
             value: value1,
           },
         ];
-      } else if (key in fileData2) {
+      }
+
+      if (key in fileData2) {
         return [
           ...acc,
           {
@@ -57,16 +63,16 @@ const compareFiles = (fileData1, fileData2) => {
           },
         ];
       }
-    } else {
-      return [
-        ...acc,
-        {
-          key,
-          type: 'unchanged',
-          value: value1,
-        },
-      ];
     }
+
+    return [
+      ...acc,
+      {
+        key,
+        type: 'unchanged',
+        value: value1,
+      },
+    ];
   }, []);
 };
 
