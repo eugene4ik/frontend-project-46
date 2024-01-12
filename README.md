@@ -18,17 +18,10 @@ npm ci && sudo npm link
 ```
 [Compairing two flat JSON files](https://asciinema.org/a/PadXNh9r4uHxD0TLNUA5bFoJs)
 
-Compairing two flat JSON files: 
-https://asciinema.org/a/PadXNh9r4uHxD0TLNUA5bFoJs
+[Compairing two flat YAML files](https://asciinema.org/a/q8OPmczQgdiwD0uxsL5246Nko)
 
-Compairing two flat YAML files: 
-https://asciinema.org/a/q8OPmczQgdiwD0uxsL5246Nko
+[Compairing two nested JSON files, output in Stylish format (by default)](https://asciinema.org/a/SIXOpLxM5XOJuJJ1wiQSCTGQa)
 
-Compairing two nested JSON files, output in Stylish format (by default):
-https://asciinema.org/a/SIXOpLxM5XOJuJJ1wiQSCTGQa
+[Compairing two nested JSON files, output in Plain text format](https://asciinema.org/a/TiqvVI7RwBUgobG4tGgpGN7qn)
 
-Compairing two nested JSON files, output in Plain text format:
-https://asciinema.org/a/TiqvVI7RwBUgobG4tGgpGN7qn
-
-Compairing two nested JSON files, output in JSON format:
-https://asciinema.org/a/pi9H2HHwWHloT98K3Sc7vNBST
+[Compairing two nested JSON files, output in JSON format](https://asciinema.org/a/pi9H2HHwWHloT98K3Sc7vNBST)
