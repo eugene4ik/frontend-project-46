@@ -6,7 +6,7 @@ gendiff
 
 
 
-gendiff
+## gendiff
 
 Gendiff is designed to detect difference between two files and to highlight these differences using one of three suppoerted output formates - Stylish (by default), JSON or Plain text. 
 

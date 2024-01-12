@@ -6,7 +6,7 @@ import gendiff from '../src/index.js';
 const filename = fileURLToPath(import.meta.url);
 const currentDir = dirname(filename);
 
-describe('gendiff', () => {
+describe('gendiff JSON files in Stylish format', () => {
   it('Compare JSON files in Stylish format', () => {
     const filepath1 = './__fixtures__/file1.json';
     const filepath2 = './__fixtures__/file2.json';
@@ -22,7 +22,7 @@ describe('gendiff', () => {
     expect(result).toBe(expected);
   });
 });
-describe('gendiff', () => {
+describe('gendiff YAML files in Stylish format', () => {
   it('Compare YAML files in Stylish format', () => {
     const filepath1 = './__fixtures__/file1.yaml';
     const filepath2 = './__fixtures__/file2.yaml';
@@ -38,7 +38,7 @@ describe('gendiff', () => {
     expect(result).toBe(expected);
   });
 });
-describe('gendiff', () => {
+describe('gendiff JSON files in Plain format', () => {
   it('Compare JSON files in Plain format', () => {
     const filepath1 = './__fixtures__/file1.json';
     const filepath2 = './__fixtures__/file2.json';
@@ -54,7 +54,7 @@ describe('gendiff', () => {
     expect(result).toBe(expected);
   });
 });
-describe('gendiff', () => {
+describe('gendiff YAML files in Plain format', () => {
   it('Compare YAML files in Plain format', () => {
     const filepath1 = './__fixtures__/file1.yaml';
     const filepath2 = './__fixtures__/file2.yaml';
@@ -71,7 +71,7 @@ describe('gendiff', () => {
   });
 });
 
-describe('gendiff', () => {
+describe('gendiff  different files in JSON format', () => {
   it('Compare different files in JSON format', () => {
     const filepath1 = './__fixtures__/file1.json';
     const filepath2 = './__fixtures__/file2.json';
