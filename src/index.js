@@ -12,7 +12,7 @@ const resolveFilePath = (filePath) => {
 };
 
 const compareFiles = (fileData1, fileData2) => {
-  const difference = [];
+  let difference = [];
 
   const allKeys = _.union(Object.keys(fileData1), Object.keys(fileData2));
 
@@ -21,38 +21,53 @@ const compareFiles = (fileData1, fileData2) => {
     const value2 = fileData2[key];
 
     if (_.isObject(value1) && _.isObject(value2)) {
-      difference.push({
-        key,
-        type: 'nested',
-        children: compareFiles(value1, value2),
-      });
+      difference = [
+        ...difference,
+        {
+          key,
+          type: 'nested',
+          children: compareFiles(value1, value2),
+        },
+      ];
     } else if (value1 !== value2) {
       if (key in fileData1 && key in fileData2) {
-        difference.push({
-          key,
-          type: 'updated',
-          oldValue: value1,
-          newValue: value2,
-        });
+        difference = [
+          ...difference,
+          {
+            key,
+            type: 'updated',
+            oldValue: value1,
+            newValue: value2,
+          },
+        ];
       } else if (key in fileData1) {
-        difference.push({
-          key,
-          type: 'removed',
-          value: value1,
-        });
+        difference = [
+          ...difference,
+          {
+            key,
+            type: 'removed',
+            value: value1,
+          },
+        ];
       } else if (key in fileData2) {
-        difference.push({
-          key,
-          type: 'added',
-          value: value2,
-        });
+        difference = [
+          ...difference,
+          {
+            key,
+            type: 'added',
+            value: value2,
+          },
+        ];
       }
     } else {
-      difference.push({
-        key,
-        type: 'unchanged',
-        value: value1,
-      });
+      difference = [
+        ...difference,
+        {
+          key,
+          type: 'unchanged',
+          value: value1,
+        },
+      ];
     }
   });
   return difference;
