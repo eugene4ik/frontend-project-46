@@ -10,5 +10,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  scripts: {
+    lint: 'eslint .',
+  },
   rules: { 'import/extensions': ['error', 'ignorePackages'] },
 };
