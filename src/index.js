@@ -95,4 +95,3 @@ const gendiff = (filepath1, filepath2, format = 'stylish') => {
 };
 
 export default gendiff;
-// cd vs_code/hexlet-git/frontend-project-46
