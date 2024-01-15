@@ -6,84 +6,53 @@ import gendiff from '../src/index.js';
 const filename = fileURLToPath(import.meta.url);
 const currentDir = dirname(filename);
 
-describe('gendiff JSON files in Stylish format', () => {
-  it('Compare JSON files in Stylish format', () => {
-    const filepath1 = './__fixtures__/file1.json';
-    const filepath2 = './__fixtures__/file2.json';
+const testCases = [
+  [
+    'JSON files in Stylish format',
+    './__fixtures__/file1.json',
+    './__fixtures__/file2.json',
+    'stylish',
+    '../__fixtures__/testForStylish.txt',
+  ],
+  [
+    'YAML files in Stylish format',
+    './__fixtures__/file1.yaml',
+    './__fixtures__/file2.yaml',
+    'stylish',
+    '../__fixtures__/testForStylish.txt',
+  ],
+  [
+    'JSON files in Plain format',
+    './__fixtures__/file1.json',
+    './__fixtures__/file2.json',
+    'plain',
+    '../__fixtures__/testForPlain.txt',
+  ],
+  [
+    'YAML files in Plain format',
+    './__fixtures__/file1.yaml',
+    './__fixtures__/file2.yaml',
+    'plain',
+    '../__fixtures__/testForPlain.txt',
+  ],
+  [
+    'different files in JSON format',
+    './__fixtures__/file1.json',
+    './__fixtures__/file2.json',
+    'json',
+    '../__fixtures__/testForJSON.txt',
+  ],
+];
 
-    const expectedFilePath = path.join(
-      currentDir,
-      '../__fixtures__/testForStylish.txt',
-    );
-    const expected = fs.readFileSync(expectedFilePath, 'utf8').trim();
-
-    const result = gendiff(filepath1, filepath2, 'stylish').trim();
-
-    expect(result).toBe(expected);
-  });
-});
-describe('gendiff YAML files in Stylish format', () => {
-  it('Compare YAML files in Stylish format', () => {
-    const filepath1 = './__fixtures__/file1.yaml';
-    const filepath2 = './__fixtures__/file2.yaml';
-
-    const expectedFilePath = path.join(
-      currentDir,
-      '../__fixtures__/testForStylish.txt',
-    );
-    const expected = fs.readFileSync(expectedFilePath, 'utf8').trim();
-
-    const result = gendiff(filepath1, filepath2, 'stylish').trim();
-
-    expect(result).toBe(expected);
-  });
-});
-describe('gendiff JSON files in Plain format', () => {
-  it('Compare JSON files in Plain format', () => {
-    const filepath1 = './__fixtures__/file1.json';
-    const filepath2 = './__fixtures__/file2.json';
-
-    const expectedFilePath = path.join(
-      currentDir,
-      '../__fixtures__/testForPlain.txt',
-    );
-    const expected = fs.readFileSync(expectedFilePath, 'utf8').trim();
-
-    const result = gendiff(filepath1, filepath2, 'plain').trim();
-
-    expect(result).toBe(expected);
-  });
-});
-describe('gendiff YAML files in Plain format', () => {
-  it('Compare YAML files in Plain format', () => {
-    const filepath1 = './__fixtures__/file1.yaml';
-    const filepath2 = './__fixtures__/file2.yaml';
-
-    const expectedFilePath = path.join(
-      currentDir,
-      '../__fixtures__/testForPlain.txt',
-    );
-    const expected = fs.readFileSync(expectedFilePath, 'utf8').trim();
-
-    const result = gendiff(filepath1, filepath2, 'plain').trim();
-
-    expect(result).toBe(expected);
-  });
-});
-
-describe('gendiff  different files in JSON format', () => {
-  it('Compare different files in JSON format', () => {
-    const filepath1 = './__fixtures__/file1.json';
-    const filepath2 = './__fixtures__/file2.json';
-
-    const expectedFilePath = path.join(
-      currentDir,
-      '../__fixtures__/testForJSON.txt',
-    );
-    const expected = fs.readFileSync(expectedFilePath, 'utf8').trim();
-
-    const result = gendiff(filepath1, filepath2, 'json').trim();
-
-    expect(result).toBe(expected);
-  });
-});
+describe.each(testCases)(
+  'gendiff tests',
+  (description, filepath1, filepath2, format, expectedFilePath) => {
+    it(`Compare ${description}`, () => {
+      const expected = fs
+        .readFileSync(path.join(currentDir, expectedFilePath), 'utf8')
+        .trim();
+      const result = gendiff(filepath1, filepath2, format).trim();
+      expect(result).toBe(expected);
+    });
+  },
+);
