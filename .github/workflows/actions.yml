@@ -26,17 +26,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # Если у вас нет скрипта make install, используйте npm install или аналогичное
-      # - run: make install
-
       - run: make lint
       - run: make test
 
-      # Если у вас есть скрипт npm run coverage для генерации отчетов о покрытии, используйте его
       - name: Run Test Coverage
         run: npm run coverage
 
-      # Использование Code Climate Action для отправки отчетов о покрытии кода
       - name: Code Climate Test Reporting
         uses: paambaati/codeclimate-action@v5.0.0
         env:
