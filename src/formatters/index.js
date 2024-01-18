@@ -10,7 +10,7 @@ const selectedFormatter = (difference, format) => {
     case 'json':
       return JSON.stringify(difference);
     default:
-      throw new Error(`${format} is not supported`);
+      throw new Error(`Selected format ${format} is not supported`);
   }
 };
 
